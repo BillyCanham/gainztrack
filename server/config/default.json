@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://admin:gainz@cluster0.miyco.mongodb.net/Cluster0?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://admin:gainz@cluster0.miyco.mongodb.net/Cluster0?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
 }
