@@ -17,7 +17,7 @@ app.use("/api/users", require("./routes/users"));
 // authorisation
 app.use("/api/authorisation", require("./routes/authorisation"));
 // exercises + exercise logs
-
+app.use("/api/exercise", require("./routes/exercise"));
 // set up basic server
 
 const PORT = process.env.PORT || 5000;
