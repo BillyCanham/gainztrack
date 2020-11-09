@@ -50,7 +50,54 @@ router.post(
 // @route put api/exercise
 // @desc update
 // @ access Private
+router.put("/:id", auth, async (req, res) => {
+  const { name } = req.body;
+  // build excersie object
+  const exerciseFields = {};
+  if (name) exerciseFields.name = name;
+
+  try {
+    let exercise = await Exercise.findById(req.params.id);
+    if (!exercise) return res.status(404).json({ msg: "not found" });
+
+    // make sure user owns exercise
+    if (exercise.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "go away" });
+    }
+
+    exercise = await Exercise.findByIdAndUpdate(
+      req.params.id,
+      { $set: exerciseFields },
+      { new: true }
+    );
+
+    res.json(exercise);
+  } catch (err) {
+    console.log(er.message);
+    res.status(500).send("server error");
+  }
+});
 
 // @route delete api/exercise
 // @desc delete exercise
 // @ access Private
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    let exercise = await Exercise.findById(req.params.id);
+    if (!exercise) return res.status(404).json({ msg: "not found" });
+
+    // make sure user owns excersize
+    if (exercise.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "go away" });
+    }
+
+    await Exercise.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: "exercise removed" });
+  } catch (err) {
+    console.log(er.message);
+    res.status(500).send("server error");
+  }
+});
+
+module.exports = router;
