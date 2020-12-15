@@ -6,6 +6,9 @@ import About from './components/pages/About';
 
 
 
+
+
+
 import ExerciseState from './context/exercise/ExerciseState';
 
  import './style/app.css';
@@ -21,7 +24,9 @@ const App = () => {
        <Route exact path='/' component={Home} />
        <Route exact path='/about' component={About} />
        
-     </Switch>
+       
+      
+       </Switch>
           </div>
         </Fragment>
       </Router>
